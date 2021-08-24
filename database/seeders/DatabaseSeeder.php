@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
 
         $users = [
             [
-                'name'     => 'Prodan Catalin',
-                'email'    => 'catalin.prodan@newpixel.ro',
+                'name'     => 'Super Admin',
+                'email'    => 'superadmin@project.ro',
                 'password' => '$2y$10$gNwuvzWGZR6ylkL01ziGkuF6GGAUg3qH4Egnl/wMbuyjBAOrUvHpa',
                 'role'     => 'superadmin'
             ],
