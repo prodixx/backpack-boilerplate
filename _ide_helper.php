@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.55.0.
+ * Generated for Laravel 8.65.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -129,7 +129,7 @@
                     /**
          * Get the base path of the Laravel installation.
          *
-         * @param string $path Optionally, a path to append to the base path
+         * @param string $path
          * @return string 
          * @static 
          */ 
@@ -141,7 +141,7 @@
                     /**
          * Get the path to the bootstrap directory.
          *
-         * @param string $path Optionally, a path to append to the bootstrap path
+         * @param string $path
          * @return string 
          * @static 
          */ 
@@ -153,7 +153,7 @@
                     /**
          * Get the path to the application configuration files.
          *
-         * @param string $path Optionally, a path to append to the config path
+         * @param string $path
          * @return string 
          * @static 
          */ 
@@ -165,7 +165,7 @@
                     /**
          * Get the path to the database directory.
          *
-         * @param string $path Optionally, a path to append to the database path
+         * @param string $path
          * @return string 
          * @static 
          */ 
@@ -564,6 +564,7 @@
                     /**
          * {@inheritdoc}
          *
+         * @return \Symfony\Component\HttpFoundation\Response 
          * @static 
          */ 
         public static function handle($request, $type = 1, $catch = true)
@@ -699,7 +700,7 @@
          * @param int $code
          * @param string $message
          * @param array $headers
-         * @return void 
+         * @return \Illuminate\Foundation\never 
          * @throws \Symfony\Component\HttpKernel\Exception\HttpException
          * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
          * @static 
@@ -707,7 +708,7 @@
         public static function abort($code, $message = '', $headers = [])
         {
                         /** @var \Illuminate\Foundation\Application $instance */
-                        $instance->abort($code, $message, $headers);
+                        return $instance->abort($code, $message, $headers);
         }
                     /**
          * Register a terminating callback with the application.
@@ -937,6 +938,7 @@
          * `has($id)` returning true does not mean that `get($id)` will not throw an exception.
          * It does however mean that `get($id)` will not throw a `NotFoundExceptionInterface`.
          *
+         * @return bool 
          * @param string $id Identifier of the entry to look for.
          * @return bool 
          * @static 
@@ -1265,6 +1267,7 @@
                     /**
          * Finds an entry of the container by its identifier and returns it.
          *
+         * @return mixed 
          * @param string $id Identifier of the entry to look for.
          * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
          * @throws ContainerExceptionInterface Error while retrieving the entry.
@@ -2036,6 +2039,18 @@
         {
                         /** @var \Illuminate\Auth\SessionGuard $instance */
                         return $instance->viaRemember();
+        }
+                    /**
+         * Set the number of minutes the remember me cookie should be valid for.
+         *
+         * @param int $minutes
+         * @return \Illuminate\Auth\SessionGuard 
+         * @static 
+         */ 
+        public static function setRememberDuration($minutes)
+        {
+                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        return $instance->setRememberDuration($minutes);
         }
                     /**
          * Get the cookie creator instance used by the guard.
@@ -3408,6 +3423,7 @@
                     /**
          * Obtains multiple cache items by their unique keys.
          *
+         * @return \Illuminate\Cache\iterable 
          * @param \Psr\SimpleCache\iterable $keys A list of keys that can obtained in a single operation.
          * @param mixed $default Default value to return for keys that do not exist.
          * @return \Psr\SimpleCache\iterable A list of key => value pairs. Cache keys that do not exist or are stale will have $default as value.
@@ -3451,6 +3467,7 @@
                     /**
          * Persists data in the cache, uniquely referenced by a key with an optional expiration TTL time.
          *
+         * @return bool 
          * @param string $key The key of the item to store.
          * @param mixed $value The value of the item to store, must be serializable.
          * @param null|int|\DateInterval $ttl Optional. The TTL value of this item. If no value is sent and
@@ -3482,6 +3499,7 @@
                     /**
          * Persists a set of key => value pairs in the cache, with an optional TTL.
          *
+         * @return bool 
          * @param \Psr\SimpleCache\iterable $values A list of key => value pairs for a multiple-set operation.
          * @param null|int|\DateInterval $ttl Optional. The TTL value of this item. If no value is sent and
          *                                       the driver supports TTL then the library may set a default value
@@ -3605,6 +3623,7 @@
                     /**
          * Delete an item from the cache by its unique key.
          *
+         * @return bool 
          * @param string $key The unique cache key of the item to delete.
          * @return bool True if the item was successfully removed. False if there was an error.
          * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -3619,6 +3638,7 @@
                     /**
          * Deletes multiple cache items in a single operation.
          *
+         * @return bool 
          * @param \Psr\SimpleCache\iterable $keys A list of string-based keys to be deleted.
          * @return bool True if the items were successfully removed. False if there was an error.
          * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -3634,6 +3654,7 @@
                     /**
          * Wipes clean the entire cache's keys.
          *
+         * @return bool 
          * @return bool True on success and false on failure.
          * @static 
          */ 
@@ -4905,6 +4926,18 @@
         {            //Method inherited from \Illuminate\Database\Connection         
                         /** @var \Illuminate\Database\MySqlConnection $instance */
                         $instance->logQuery($query, $bindings, $time);
+        }
+                    /**
+         * Register a hook to be run just before a database query is executed.
+         *
+         * @param \Closure $callback
+         * @return \Illuminate\Database\MySqlConnection 
+         * @static 
+         */ 
+        public static function beforeExecuting($callback)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        return $instance->beforeExecuting($callback);
         }
                     /**
          * Register a database query listener with the connection.
@@ -6876,7 +6909,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest contentType(string $contentType)
      * @method static \Illuminate\Http\Client\PendingRequest dd()
      * @method static \Illuminate\Http\Client\PendingRequest dump()
-     * @method static \Illuminate\Http\Client\PendingRequest retry(int $times, int $sleep = 0)
+     * @method static \Illuminate\Http\Client\PendingRequest retry(int $times, int $sleep = 0, ?callable $when = null)
      * @method static \Illuminate\Http\Client\PendingRequest sink(string|resource $to)
      * @method static \Illuminate\Http\Client\PendingRequest stub(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest timeout(int $seconds)
@@ -7466,7 +7499,7 @@
                     /**
          * Get the default log driver name.
          *
-         * @return string 
+         * @return string|null 
          * @static 
          */ 
         public static function getDefaultDriver()
@@ -8174,6 +8207,20 @@
                         return $instance->forgetDrivers();
         }
                     /**
+         * Assert if a notification was sent on-demand based on a truth-test callback.
+         *
+         * @param string|\Closure $notification
+         * @param callable|null $callback
+         * @return void 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function assertSentOnDemand($notification, $callback = null)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
+                        $instance->assertSentOnDemand($notification, $callback);
+        }
+                    /**
          * Assert if a notification was sent based on a truth-test callback.
          *
          * @param mixed $notifiable
@@ -8187,6 +8234,19 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
                         $instance->assertSentTo($notifiable, $notification, $callback);
+        }
+                    /**
+         * Assert if a notification was sent on-demand a number of times.
+         *
+         * @param string $notification
+         * @param int $times
+         * @return void 
+         * @static 
+         */ 
+        public static function assertSentOnDemandTimes($notification, $times = 1)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
+                        $instance->assertSentOnDemandTimes($notification, $times);
         }
                     /**
          * Assert if a notification was sent a number of times.
@@ -8954,6 +9014,19 @@
          * @return int 
          * @static 
          */ 
+        public static function remaining($key, $maxAttempts)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->remaining($key, $maxAttempts);
+        }
+                    /**
+         * Get the number of retries left for the given key.
+         *
+         * @param string $key
+         * @param int $maxAttempts
+         * @return int 
+         * @static 
+         */ 
         public static function retriesLeft($key, $maxAttempts)
         {
                         /** @var \Illuminate\Cache\RateLimiter $instance */
@@ -9323,6 +9396,18 @@
                         return $instance->fullUrlWithQuery($query);
         }
                     /**
+         * Get the full URL for the request without the given query string parameters.
+         *
+         * @param array|string $query
+         * @return string 
+         * @static 
+         */ 
+        public static function fullUrlWithoutQuery($keys)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->fullUrlWithoutQuery($keys);
+        }
+                    /**
          * Get the current path info for the request.
          *
          * @return string 
@@ -9559,6 +9644,7 @@
                     /**
          * Clones a request and overrides some of its parameters.
          *
+         * @return static 
          * @param array $query The GET parameters
          * @param array $request The POST parameters
          * @param array $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
@@ -11040,6 +11126,18 @@
                         return $instance->boolean($key, $default);
         }
                     /**
+         * Retrieve input from the request as a collection.
+         *
+         * @param array|string|null $key
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function collect($key = null)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->collect($key);
+        }
+                    /**
          * Get a subset containing the provided keys with values from the input data.
          *
          * @param array|mixed $keys
@@ -11267,7 +11365,7 @@
                     /**
          * Create a new response instance.
          *
-         * @param string $content
+         * @param mixed $content
          * @param int $status
          * @param array $headers
          * @return \Illuminate\Http\Response 
@@ -15174,18 +15272,31 @@
                         return $instance->renderComponent();
         }
                     /**
+         * Get an item from the component data that exists above the current component.
+         *
+         * @param string $key
+         * @param mixed $default
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function getConsumableComponentData($key, $default = null)
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->getConsumableComponentData($key, $default);
+        }
+                    /**
          * Start the slot rendering process.
          *
          * @param string $name
          * @param string|null $content
+         * @param array $attributes
          * @return void 
-         * @throws \InvalidArgumentException
          * @static 
          */ 
-        public static function slot($name, $content = null)
+        public static function slot($name, $content = null, $attributes = [])
         {
                         /** @var \Illuminate\View\Factory $instance */
-                        $instance->slot($name, $content);
+                        $instance->slot($name, $content, $attributes);
         }
                     /**
          * Save the slot content for rendering.
@@ -15805,8 +15916,8 @@
          *          company model, the 'App/Models/Address' string will be returned.
          * @param string $relationString Relation string. A dot notation can be used to chain multiple relations.
          * @param int $length Optionally specify the number of relations to omit from the start of the relation string. If
-         *                                                            the provided length is negative, then that many relations will be omitted from the end of the relation
-         *                                                            string.
+         *                       the provided length is negative, then that many relations will be omitted from the end of the relation
+         *                       string.
          * @param \Illuminate\Database\Eloquent\Model $model Optionally specify a different model than the one in the crud object.
          * @return string Relation model name.
          * @static 
@@ -15822,8 +15933,8 @@
          *
          * @param \Illuminate\Database\Eloquent\Model $model Model (eg: user).
          * @param string $relationString Model relation. Can be a string representing the name of a relation method in the given
-         *                                                            Model or one from a different Model through multiple relations. A dot notation can be used to specify
-         *                                                            multiple relations (eg: user.company.address).
+         *                                  Model or one from a different Model through multiple relations. A dot notation can be used to specify
+         *                                  multiple relations (eg: user.company.address).
          * @param string $attribute The attribute from the relation model (eg: the street attribute from the address model).
          * @return array An array containing a list of attributes from the resulting model.
          * @static 
@@ -16306,10 +16417,10 @@
          * Delete a row from the database.
          *
          * @param int $id The id of the item to be deleted.
+         * @return bool True if the item was deleted.
          * @throws \Illuminate\Database\Eloquent\ModelNotFoundException if the model was not found.
          * 
          * TODO: should this delete items with relations to it too?
-         * @return bool True if the item was deleted.
          * @static 
          */ 
         public static function delete($id)
@@ -16499,8 +16610,8 @@
          * Check if a operation is allowed for a Crud Panel. Fail if not.
          *
          * @param string $operation
-         * @throws \Backpack\CRUD\Exception\AccessDeniedException in case the operation is not enabled
          * @return bool 
+         * @throws \Backpack\CRUD\Exception\AccessDeniedException in case the operation is not enabled
          * @static 
          */ 
         public static function hasAccessOrFail($operation)
@@ -17422,7 +17533,7 @@
          * @param string $type Type of button: view or model_function.
          * @param string $content The HTML for the button.
          * @param bool|string $position Position on the stack: beginning or end. If false, the position will be
-         *                                     'beginning' for the line stack or 'end' otherwise.
+         *                                 'beginning' for the line stack or 'end' otherwise.
          * @param bool $replaceExisting True if a button with the same name on the given stack should be replaced.
          * @return \Backpack\CRUD\app\Library\CrudPanel\CrudButton The new CRUD button.
          * @static 
@@ -20982,6 +21093,20 @@ namespace  {
             }
              
                 /**
+             * Get a single column's value from the first result of the query or throw an exception.
+             *
+             * @param string|\Illuminate\Database\Query\Expression $column
+             * @return mixed 
+             * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+             * @static 
+             */ 
+            public static function valueOrFail($column)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->valueOrFail($column);
+            }
+             
+                /**
              * Execute the query as a "select" statement.
              *
              * @param array|string $columns
@@ -21622,6 +21747,131 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->orWhereDoesntHaveMorph($relation, $types, $callback);
+            }
+             
+                /**
+             * Add a basic where clause to a relationship query.
+             *
+             * @param string $relation
+             * @param \Closure|string|array|\Illuminate\Database\Query\Expression $column
+             * @param mixed $operator
+             * @param mixed $value
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function whereRelation($relation, $column, $operator = null, $value = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->whereRelation($relation, $column, $operator, $value);
+            }
+             
+                /**
+             * Add an "or where" clause to a relationship query.
+             *
+             * @param string $relation
+             * @param \Closure|string|array|\Illuminate\Database\Query\Expression $column
+             * @param mixed $operator
+             * @param mixed $value
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function orWhereRelation($relation, $column, $operator = null, $value = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->orWhereRelation($relation, $column, $operator, $value);
+            }
+             
+                /**
+             * Add a polymorphic relationship condition to the query with a where clause.
+             *
+             * @param \Illuminate\Database\Eloquent\Relations\MorphTo|string $relation
+             * @param string|array $types
+             * @param \Closure|string|array|\Illuminate\Database\Query\Expression $column
+             * @param mixed $operator
+             * @param mixed $value
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function whereMorphRelation($relation, $types, $column, $operator = null, $value = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->whereMorphRelation($relation, $types, $column, $operator, $value);
+            }
+             
+                /**
+             * Add a polymorphic relationship condition to the query with an "or where" clause.
+             *
+             * @param \Illuminate\Database\Eloquent\Relations\MorphTo|string $relation
+             * @param string|array $types
+             * @param \Closure|string|array|\Illuminate\Database\Query\Expression $column
+             * @param mixed $operator
+             * @param mixed $value
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function orWhereMorphRelation($relation, $types, $column, $operator = null, $value = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->orWhereMorphRelation($relation, $types, $column, $operator, $value);
+            }
+             
+                /**
+             * Add a morph-to relationship condition to the query.
+             *
+             * @param \Illuminate\Database\Eloquent\Relations\MorphTo|string $relation
+             * @param \Illuminate\Database\Eloquent\Model|string $model
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function whereMorphedTo($relation, $model, $boolean = 'and')
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->whereMorphedTo($relation, $model, $boolean);
+            }
+             
+                /**
+             * Add a morph-to relationship condition to the query with an "or where" clause.
+             *
+             * @param \Illuminate\Database\Eloquent\Relations\MorphTo|string $relation
+             * @param \Illuminate\Database\Eloquent\Model|string $model
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function orWhereMorphedTo($relation, $model)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->orWhereMorphedTo($relation, $model);
+            }
+             
+                /**
+             * Add a "belongs to" relationship where clause to the query.
+             *
+             * @param \Illuminate\Database\Eloquent\Model $related
+             * @param string $relationship
+             * @param string $boolean
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @throws \Exception
+             * @static 
+             */ 
+            public static function whereBelongsTo($related, $relationshipName = null, $boolean = 'and')
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->whereBelongsTo($related, $relationshipName, $boolean);
+            }
+             
+                /**
+             * Add an "BelongsTo" relationship with an "or where" clause to the query.
+             *
+             * @param \Illuminate\Database\Eloquent\Model $related
+             * @param string $relationship
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @throws \Exception
+             * @static 
+             */ 
+            public static function orWhereBelongsTo($related, $relationshipName = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->orWhereBelongsTo($related, $relationshipName);
             }
              
                 /**
@@ -23105,7 +23355,7 @@ namespace  {
                 /**
              * Add an "order by" clause to the query.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string $column
+             * @param \Closure|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string $column
              * @param string $direction
              * @return \Illuminate\Database\Query\Builder 
              * @throws \InvalidArgumentException
@@ -23120,7 +23370,7 @@ namespace  {
                 /**
              * Add a descending "order by" clause to the query.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string $column
+             * @param \Closure|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Database\Query\Expression|string $column
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -23606,6 +23856,19 @@ namespace  {
             }
              
                 /**
+             * Update records in a PostgreSQL database using the update from syntax.
+             *
+             * @param array $values
+             * @return int 
+             * @static 
+             */ 
+            public static function updateFrom($values)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->updateFrom($values);
+            }
+             
+                /**
              * Insert or update a record matching the attributes, and fill it with values.
              *
              * @param array $attributes
@@ -23801,13 +24064,13 @@ namespace  {
                 /**
              * Die and dump the current SQL and bindings.
              *
-             * @return void 
+             * @return \Illuminate\Database\Query\never 
              * @static 
              */ 
             public static function dd()
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
-                                $instance->dd();
+                                return $instance->dd();
             }
              
                 /**
