@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.83.0.
+ * Generated for Laravel 8.83.13.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -8947,7 +8947,7 @@
                     /**
          * Push a new job onto the queue.
          *
-         * @param string $job
+         * @param string|object $job
          * @param mixed $data
          * @param string|null $queue
          * @return mixed 
@@ -8976,7 +8976,7 @@
          * Push a new job onto the queue after a delay.
          *
          * @param \DateTimeInterface|\DateInterval|int $delay
-         * @param string $job
+         * @param string|object $job
          * @param mixed $data
          * @param string|null $queue
          * @return mixed 
@@ -8991,7 +8991,7 @@
          * Push a new job onto the queue.
          *
          * @param string $queue
-         * @param string $job
+         * @param string|object $job
          * @param mixed $data
          * @return mixed 
          * @static 
@@ -9006,7 +9006,7 @@
          *
          * @param string $queue
          * @param \DateTimeInterface|\DateInterval|int $delay
-         * @param string $job
+         * @param string|object $job
          * @param mixed $data
          * @return mixed 
          * @static 
@@ -11913,6 +11913,7 @@
      * @method static \Illuminate\Routing\RouteRegistrar prefix(string $prefix)
      * @method static \Illuminate\Routing\RouteRegistrar scopeBindings()
      * @method static \Illuminate\Routing\RouteRegistrar where(array $where)
+     * @method static \Illuminate\Routing\RouteRegistrar withoutMiddleware(array|string $middleware)
      * @see \Illuminate\Routing\Router
      */ 
         class Route {
@@ -19496,7 +19497,7 @@
          * Setter for the settings key-value store.
          *
          * @param string $key Usually operation.name (ex: reorder.max_level)
-         * @param bool $value True/false depending on success.
+         * @param string $value The value being set
          * @static 
          */ 
         public static function set($key, $value)
@@ -19730,6 +19731,18 @@
         public static function macro($name, $macro)
         {
                         \Backpack\CRUD\app\Library\CrudPanel\CrudPanel::macro($name, $macro);
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function parentMacro($name, $macro)
+        {
+                        \Backpack\CRUD\app\Library\CrudPanel\CrudPanel::parentMacro($name, $macro);
         }
                     /**
          * Mix another object into the class.
@@ -20357,7 +20370,7 @@
          * Get the gravatar url
          *
          * @param string $email
-         * @param string $configGroup
+         * @param string|array|null $configGroup
          * @return string 
          * @throws InvalidEmailException
          * @static 
@@ -20988,6 +21001,48 @@
         {            //Method inherited from \Illuminate\Support\MessageBag         
                         /** @var \Prologue\Alerts\AlertsMessageBag $instance */
                         return $instance->toJson($options);
+        }
+         
+    }
+     
+}
+
+    namespace Spatie\SignalAwareCommand\Facades { 
+            /**
+     * 
+     *
+     * @see \Spatie\SignalAwareCommand\Signal
+     */ 
+        class Signal {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function handle($signal, $callable)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->handle($signal, $callable);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function executeSignalHandlers($signal, $command)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->executeSignalHandlers($signal, $command);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearHandlers($signal = null)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->clearHandlers($signal);
         }
          
     }
@@ -24598,6 +24653,7 @@ namespace  {
             class Gravatar extends \Creativeorange\Gravatar\Facades\Gravatar {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Alert extends \Prologue\Alerts\Facades\Alert {}
+            class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}
             class Setting extends \Backpack\Settings\app\Models\Setting {}
      
 }
