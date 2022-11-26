@@ -1,4 +1,4 @@
-# Laravel 8.* + Backpack 4.* Boilerplate
+# Laravel 9.* + Backpack 5.* Boilerplate
 
 ## Installed packages
 
