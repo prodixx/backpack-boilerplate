@@ -9,7 +9,7 @@
         "backpack/backupmanager": "^5.0",
         "backpack/crud": "^6.6",
         "backpack/logmanager": "^5.0",
-        "backpack/permissionmanager": "^7.1",
+        "backpack/permissionmanager": "^7.2",
         "backpack/pro": "^2.1",
         "backpack/settings": "^3.1",
         "backpack/theme-tabler": "^1.2",
