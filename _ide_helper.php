@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.48.4.
+ * Generated for Laravel 10.48.7.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -8874,6 +8874,17 @@ namespace Illuminate\Support\Facades {
                         return $instance->hasSent($notifiable, $notification);
         }
                     /**
+         * Specify if notification should be serialized and restored when being "pushed" to the queue.
+         *
+         * @param bool $serializeAndRestore
+         * @return \Illuminate\Support\Testing\Fakes\NotificationFake 
+         * @static 
+         */        public static function serializeAndRestore($serializeAndRestore = true)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
+                        return $instance->serializeAndRestore($serializeAndRestore);
+        }
+                    /**
          * Get the notifications that have been sent.
          *
          * @return array 
@@ -17230,52 +17241,6 @@ namespace Backpack\Basset\Facades {
         {
                         /** @var \Backpack\Basset\BassetManager $instance */
                         return $instance->loaded();
-        }
-                    /**
-         * Outputs a file depending on its type.
-         *
-         * @param string $path
-         * @param array $attributes
-         * @return void 
-         * @static 
-         */        public static function echoFile($path, $attributes = [])
-        {
-                        /** @var \Backpack\Basset\BassetManager $instance */
-                        $instance->echoFile($path, $attributes);
-        }
-                    /**
-         * Outputs the CSS link tag.
-         *
-         * @param string $path
-         * @param array $attributes
-         * @return void 
-         * @static 
-         */        public static function echoCss($path, $attributes = [])
-        {
-                        /** @var \Backpack\Basset\BassetManager $instance */
-                        $instance->echoCss($path, $attributes);
-        }
-                    /**
-         * Outputs the JS script tag.
-         *
-         * @param string $path
-         * @return void 
-         * @static 
-         */        public static function echoJs($path, $attributes = [])
-        {
-                        /** @var \Backpack\Basset\BassetManager $instance */
-                        $instance->echoJs($path, $attributes);
-        }
-                    /**
-         * Generates the asset path.
-         *
-         * @param string $path
-         * @return string 
-         * @static 
-         */        public static function assetPath($path)
-        {
-                        /** @var \Backpack\Basset\BassetManager $instance */
-                        return $instance->assetPath($path);
         }
                     /**
          * Returns the asset path.
