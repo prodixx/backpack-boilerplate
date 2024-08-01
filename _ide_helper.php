@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.48.7.
+ * Generated for Laravel 10.48.18.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -17296,10 +17296,10 @@ namespace Backpack\Basset\Facades {
          * @param string $code
          * @return \Backpack\Basset\Enums\StatusEnum 
          * @static 
-         */        public static function bassetBlock($asset, $code, $output = true)
+         */        public static function bassetBlock($asset, $code, $output = true, $cache = true)
         {
                         /** @var \Backpack\Basset\BassetManager $instance */
-                        return $instance->bassetBlock($asset, $code, $output);
+                        return $instance->bassetBlock($asset, $code, $output, $cache);
         }
                     /**
          * Internalize an Archive.
@@ -17391,7 +17391,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          * All Create-Read-Update-Delete operations are done using that Eloquent Collection.
          *
          * @param string $model_namespace Full model namespace. Ex: App\Models\Article
-         * @throws \Exception in case the model does not exist
+         * @throws Exception in case the model does not exist
          * @static 
          */        public static function setModel($model_namespace)
         {
@@ -17437,7 +17437,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          *
          * @param string $route Route name.
          * @param array $parameters Parameters.
-         * @throws \Exception
+         * @throws Exception
          * @static 
          */        public static function setRouteName($route, $parameters = [])
         {
@@ -17597,6 +17597,30 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
                         return $instance->parseTranslatableAttributes($model, $attribute, $value);
         }
                     /**
+         * 
+         *
+         * @static 
+         */        public static function setLocaleOnModel($model)
+        {
+                        /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
+                        return $instance->setLocaleOnModel($model);
+        }
+                    /**
+         * Allow to add an attribute to multiple fields/columns/filters/buttons at same time.
+         * 
+         * Using the fluent syntax allow the developer to add attributes to multiple fields at the same time. Eg:
+         * 
+         * - CRUD::group(CRUD::field('price')->type('number'), CRUD::field('title')->type('text'))->tab('both_on_same_tab');
+         *
+         * @param mixed  fluent syntax objects.
+         * @return \Backpack\CRUD\app\Library\CrudPanel\CrudObjectGroup 
+         * @static 
+         */        public static function group(...$objects)
+        {
+                        /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
+                        return $instance->group(...$objects);
+        }
+                    /**
          * Insert a row in the database.
          *
          * @param array $input All input values to be inserted.
@@ -17647,6 +17671,15 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
         {
                         /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
                         return $instance->getCurrentEntry();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getCurrentEntryWithLocale()
+        {
+                        /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
+                        return $instance->getCurrentEntryWithLocale();
         }
                     /**
          * Find and retrieve an entry in the database or fail.
@@ -17704,6 +17737,15 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
                         return $instance->autoEagerLoadRelationshipColumns();
         }
                     /**
+         * 
+         *
+         * @static 
+         */        public static function eagerLoadRelationshipFields()
+        {
+                        /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
+                        return $instance->eagerLoadRelationshipFields();
+        }
+                    /**
          * Get all entries from the database.
          *
          * @return array|\Illuminate\Database\Eloquent\Collection 
@@ -17735,7 +17777,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
                         return $instance->disableDetailsRow();
         }
                     /**
-         * Add two more columns at the beginning of the ListEntrie table:
+         * Add two more columns at the beginning of the ListEntries table:
          * - one shows the checkboxes needed for bulk actions
          * - one is blank, in order for evenual detailsRow or expand buttons
          * to be in a separate column.
@@ -18048,6 +18090,21 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
                         return $instance->addBulkDeleteButton();
         }
                     /**
+         * Decode attributes that are casted as array/object/json in the model.
+         * 
+         * So that they are not json_encoded twice before they are stored in the db
+         * (once by Backpack in front-end, once by Laravel Attribute Casting).
+         *
+         * @param array $input
+         * @param mixed $model
+         * @return array 
+         * @static 
+         */        public static function decodeJsonCastedAttributes($input, $model = false)
+        {
+                        /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
+                        return $instance->decodeJsonCastedAttributes($input, $model);
+        }
+                    /**
          * 
          *
          * @return bool 
@@ -18321,9 +18378,9 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
                         return $instance->beforeColumn($targetColumn);
         }
                     /**
-         * Move this column to be first in the columns list.
+         * Move the most recently added column to the first column.
          *
-         * @return bool|null 
+         * @return bool|void 
          * @static 
          */        public static function makeFirstColumn()
         {
@@ -18450,6 +18507,8 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
         }
                     /**
          * Get a column by the id, from the associative array.
+         * 
+         * The array is 0-indexed, so the first column has id 0.
          *
          * @param int $column_number Placement inside the columns array.
          * @return array Column details.
@@ -18729,7 +18788,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
                     /**
          * Check if field is the first of its type in the given fields array.
          * 
-         * It's used in each field_type.blade.php to determine wether to push the css and js content or not (we only need to push the js and css for a field the first time it's loaded in the form, not any subsequent times).
+         * It's used in each field_type.blade.php to determine whether to push the css and js content or not (we only need to push the js and css for a field the first time it's loaded in the form, not any subsequent times).
          *
          * @param array $field The current field being tested if it's the first of its type.
          * @return bool true/false
@@ -18738,21 +18797,6 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
         {
                         /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
                         return $instance->checkIfFieldIsFirstOfItsType($field);
-        }
-                    /**
-         * Decode attributes that are casted as array/object/json in the model.
-         * 
-         * So that they are not json_encoded twice before they are stored in the db
-         * (once by Backpack in front-end, once by Laravel Attribute Casting).
-         *
-         * @param array $input
-         * @param mixed $model
-         * @return array 
-         * @static 
-         */        public static function decodeJsonCastedAttributes($input, $model = false)
-        {
-                        /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
-                        return $instance->decodeJsonCastedAttributes($input, $model);
         }
                     /**
          * 
@@ -19147,7 +19191,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          * @param string $column_direction
          * @return \Illuminate\Database\Eloquent\Builder 
          * @static 
-         */        public static function orderByWithPrefix($column_name, $column_direction = 'ASC')
+         */        public static function orderByWithPrefix($column_name, $column_direction = 'asc')
         {
                         /** @var \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $instance */
                         return $instance->orderByWithPrefix($column_name, $column_direction);
@@ -19467,8 +19511,8 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          * plus the '_token' and 'redirect_after_save' variables.
          *
          * @param array $requestInput The request input.
-         * @param array $fields
-         * @see \Illuminate\Http\Request::all() For an example on how to get the request input.
+         * @param string|bool|\Illuminate\Database\Eloquent\Model $model
+         * @param array $fields The fields that should be compacted.
          * @return array The updated request input.
          * @static 
          */        public static function compactFakeFields($requestInput, $model = false, $fields = [])
@@ -19916,6 +19960,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          * @deprecated Do not use this method as it will be removed in future versions!
          * Instead, use $this->getElementsWithoutATab($this->getCurrentFields())
          * @return \Illuminate\Support\Collection 
+         * @codeCoverageIgnore 
          * @static 
          */        public static function getFieldsWithoutATab()
         {
@@ -19937,6 +19982,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          *
          * @deprecated Do not use this method as it will be removed in future versions!
          * Instead, use $this->getTabItems($tabLabel, 'fields')
+         * @codeCoverageIgnore 
          * @return array|\Illuminate\Support\Collection 
          * @static 
          */        public static function getTabFields($tabLabel)
@@ -20760,7 +20806,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          * Getter for the settings key-value store.
          *
          * @param string $key Usually operation.name (ex: list.exportButtons)
-         * @return mixed [description]
+         * @return mixed Setting value or null
          * @static 
          */        public static function get($key)
         {
@@ -20830,7 +20876,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          * Defaults to the current operation.
          *
          * @param string $key Has no operation prepended. (ex: exportButtons)
-         * @return mixed [description]
+         * @return mixed Setting value or null
          * @static 
          */        public static function getOperationSetting($key, $operation = null)
         {
@@ -20843,7 +20889,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          * Defaults to the current operation.
          *
          * @param string $key Has no operation prepended. (ex: exportButtons)
-         * @return mixed [description]
+         * @return bool 
          * @static 
          */        public static function hasOperationSetting($key, $operation = null)
         {
@@ -20856,7 +20902,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
          * Defaults to the current operation.
          *
          * @param string $key Has no operation prepended. (ex: max_level)
-         * @param bool $value True/false depending on success.
+         * @param mixed $value The value you want to store.
          * @static 
          */        public static function setOperationSetting($key, $value, $operation = null)
         {
@@ -20932,7 +20978,7 @@ namespace Backpack\CRUD\app\Library\CrudPanel {
                         return $instance->getFieldsWithRelationType($relation_types, $nested);
         }
                     /**
-         * Parse the field name back to the related entity after the form is submited.
+         * Parse the field name back to the related entity after the form is submitted.
          * 
          * Its called in getAllFieldNames().
          *
@@ -22141,10 +22187,10 @@ namespace Spatie\LaravelIgnition\Facades {
          * 
          *
          * @static 
-         */        public static function withStackFrameArguments($withStackFrameArguments = true)
+         */        public static function withStackFrameArguments($withStackFrameArguments = true, $forcePHPIniSetting = false)
         {
                         /** @var \Spatie\FlareClient\Flare $instance */
-                        return $instance->withStackFrameArguments($withStackFrameArguments);
+                        return $instance->withStackFrameArguments($withStackFrameArguments, $forcePHPIniSetting);
         }
                     /**
          * 
@@ -22205,10 +22251,10 @@ namespace Spatie\LaravelIgnition\Facades {
          * 
          *
          * @static 
-         */        public static function registerErrorHandler()
+         */        public static function registerErrorHandler($errorLevels = null)
         {
                         /** @var \Spatie\FlareClient\Flare $instance */
-                        return $instance->registerErrorHandler();
+                        return $instance->registerErrorHandler($errorLevels);
         }
                     /**
          * 
@@ -22276,10 +22322,19 @@ namespace Spatie\LaravelIgnition\Facades {
          * 
          *
          * @static 
-         */        public static function report($throwable, $callback = null, $report = null)
+         */        public static function report($throwable, $callback = null, $report = null, $handled = null)
         {
                         /** @var \Spatie\FlareClient\Flare $instance */
-                        return $instance->report($throwable, $callback, $report);
+                        return $instance->report($throwable, $callback, $report, $handled);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function reportHandled($throwable)
+        {
+                        /** @var \Spatie\FlareClient\Flare $instance */
+                        return $instance->reportHandled($throwable);
         }
                     /**
          * 
@@ -22460,10 +22515,10 @@ namespace Illuminate\Support {
      *
      */        class Str {
                     /**
-         * This macro adds the ability to convert a dot.notation string into a [braket][notation] with some special
+         * This macro adds the ability to convert a dot.notation string into a [bracket][notation] with some special
          * options that helps us in our usecases.
          * 
-         * - $ignore: usefull when you want to convert a laravel validator rule for nested items and you
+         * - $ignore: useful when you want to convert a laravel validator rule for nested items and you
          *   would like to ignore the `*` element from the string.
          * 
          * - $keyFirst: when true, we will use the first part of the string as key and only bracket the remaining elements.
