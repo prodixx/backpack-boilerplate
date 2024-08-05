@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RolesTableSeeder extends Seeder
 {
@@ -15,9 +15,15 @@ class RolesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('roles')->delete();
-        DB::table('permissions')->delete();
+        Schema::disableForeignKeyConstraints();
+
+        Role::truncate();
+        Permission::truncate();
+
+        Schema::enableForeignKeyConstraints();
 
         Role::create(['name' => 'superadmin'])->givePermissionTo(Permission::all());
+        Role::create(['name' => 'admin'])->givePermissionTo([]);
+        Role::create(['name' => 'customer'])->givePermissionTo([]);
     }
 }

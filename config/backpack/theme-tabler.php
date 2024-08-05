@@ -69,7 +69,7 @@ return [
          * When false, the theme will only use the "defaultColorMode" set above.
          * In case "defaultColorMode" is null, system is the default.
          */
-        'showColorModeSwitcher' => false,
+        'showColorModeSwitcher' => true,
 
         /**
          * Fix the top-header component (present in "vertical_transparent") and the menu when the layout type is set as "horizontal".
@@ -90,7 +90,7 @@ return [
         /**
          * When true, horizontal layouts will display the classic top bar on top to free some space when multiple nav items are used.
          */
-        'doubleTopBarInHorizontalLayouts' => true,
+        'doubleTopBarInHorizontalLayouts' => false,
 
         /**
          * When true, the password input will have a toggle button to show/hide the password.
