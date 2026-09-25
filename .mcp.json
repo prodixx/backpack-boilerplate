@@ -1,0 +1,18 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "cmd",
+            "args": [
+                "/c",
+                "herd",
+                "php",
+                "artisan",
+                "boost:mcp"
+            ]
+        },
+        "flare": {
+            "type": "http",
+            "url": "https://flareapp.io/mcp"
+        }
+    }
+}
