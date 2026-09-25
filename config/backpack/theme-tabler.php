@@ -22,7 +22,7 @@ return [
      * Possible values: horizontal, horizontal_dark, horizontal_overlap, vertical,
      * vertical_dark, vertical_transparent (legacy theme), right_vertical, right_vertical_dark, right_vertical_transparent
      */
-    'layout' => 'horizontal',
+    'layout' => 'vertical_transparent',
 
     /**
      * Pick a login page layout.
@@ -32,15 +32,48 @@ return [
 
     /**
      * Here you can easily load your own extra css styles.
+     *
+     * SKINS. A skin is one CSS file that changes the look of the whole admin panel: colours,
+     * background, borders, spacing, fonts. Keep backpack-color-palette.css (the theme needs it),
+     * then load exactly one skin after it. Try them all at https://demo.backpackforlaravel.com
+     *
+     *   aurora.css      Frosted-glass cards over a soft mesh gradient, Backpack purple. The default.
+     *   atlas.css       Cool greys, hairline borders, dense tables, a confident blue.
+     *   manuscript.css  Warm cream, serif headings, a terracotta accent, room to breathe.
+     *   ink.css         Dark first: near-black canvas, sky-blue accent, compact rows. Pair with 'defaultColorMode' => 'dark'.
+     *   mono.css        Black on white, sharp corners, monospace labels.
+     *   blueprint.css   A graph-paper grid with a blueprint blue accent.
+     *   honey.css       A warm amber accent over a faint dot grid.
+     *   pine.css        A deep emerald accent over thin pinstripes.
+     *   synth.css       A teal accent over faint vertical lines.
+     *
      * Note: if you want to customize the style to create your own custom skin colors:
-     *   - make a copy of the file "vendor/backpack/theme-tabler/resources/assets/css/colors.css" into your project
+     *   - copy the file "vendor/backpack/theme-tabler/resources/assets/css/colors.css" into your project, with a different name
      *   - adjust colors variables as you wish
-     *   - replace "base_path('vendor/backpack/theme-tabler/resources/assets/css/colors.css')," with the path to the file created above
-     *   - boom!
+     *   - replace "base_path('vendor/backpack/theme-tabler/resources/assets/css/backpack-color-palette.css')," with the path to the file created above
      */
     'styles' => [
-        base_path('vendor/backpack/theme-tabler/resources/assets/css/color-adjustments.css'),
-        base_path('vendor/backpack/theme-tabler/resources/assets/css/colors.css'),
+        base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/backpack-color-palette.css'),
+
+        // The default look (same as aurora.css, split in two files):
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/glass.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/fuzzy-background.css'),
+
+        // Or comment the two lines above and pick one skin:
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/atlas.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/manuscript.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/ink.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/mono.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/blueprint.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/honey.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/pine.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/synth.css'),
+
+        // Background patterns only (no accent change), can be stacked on the default look:
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/dotted-background.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/vertical-lines-background.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/pinstripe-background.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/skins/paper-background.css'),
     ],
 
     /**

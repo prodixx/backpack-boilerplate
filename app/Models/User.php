@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
+    use CrudTrait;
     use HasFactory, Notifiable;
     use HasRoles;
 
@@ -62,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+
+    public function getNameAndEmailAttribute(): string
+    {
+        return $this->name.' ('.$this->email.')';
+    }
 
     /*
     |--------------------------------------------------------------------------
